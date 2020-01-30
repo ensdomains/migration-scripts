@@ -1,0 +1,36 @@
+{
+  "name": "@ensdomains/migration",
+  "version": "0.1.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ensdomains/migration.git"
+  },
+  "author": "Nick Johnson <nick@ens.domains>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/ensdomains/migration/issues"
+  },
+  "homepage": "https://github.com/ensdomains/migration#readme",
+  "dependencies": {
+    "@ensdomains/dnsregistrar": "^0.3.9",
+    "@ensdomains/ens": "git+ssh://git@github.com:ensdomains/ens-ghsa-8f9f-pc5v-9r5h.git#feature/migration",
+    "@ensdomains/ethregistrar": "git+ssh://git@github.com:ensdomains/ethregistrar-ghsa-6xj6-q3qg-rhm3.git#registrar-migration",
+    "@ensdomains/resolver": "^0.1.13",
+    "@ensdomains/root": "0.0.3",
+    "@ensdomains/subdomain-registrar": "git+ssh://git@github.com:ensdomains/subdomain-registrar-ghsa-7gp8-c7gv-q7qx#feature/migration",
+    "@truffle/hdwallet-provider": "^1.0.26",
+    "dotenv": "^8.2.0",
+    "eth-ens-namehash": "^2.0.8",
+    "truffle": "^5.1.10",
+    "truffle-plugin-verify": "^0.3.8",
+    "web3-utils": "^1.2.4"
+  }
+}

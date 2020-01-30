@@ -1,0 +1,1624 @@
+{
+  "contractName": "SimplePriceOracle",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_rentPrice",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        }
+      ],
+      "name": "RentPriceChanged",
+      "type": "event"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "isOwner",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "rentPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_rentPrice",
+          "type": "uint256"
+        }
+      ],
+      "name": "setPrice",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "duration",
+          "type": "uint256"
+        }
+      ],
+      "name": "price",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_rentPrice\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"RentPriceChanged\",\"type\":\"event\"},{\"constant\":true,\"inputs\":[],\"name\":\"isOwner\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"duration\",\"type\":\"uint256\"}],\"name\":\"price\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"rentPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_rentPrice\",\"type\":\"uint256\"}],\"name\":\"setPrice\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"isOwner()\":{\"return\":\"true if `msg.sender` is the owner of the contract.\"},\"owner()\":{\"return\":\"the address of the owner.\"},\"price(string,uint256,uint256)\":{\"details\":\"Returns the price to register or renew a name.\",\"params\":{\"duration\":\"How long the name is being registered or extended for, in seconds.\"},\"return\":\"The price of this renewal or registration, in wei.\"},\"renounceOwnership()\":{\"details\":\"Allows the current owner to relinquish control of the contract.\"},\"transferOwnership(address)\":{\"details\":\"Allows the current owner to transfer control of the contract to a newOwner.\",\"params\":{\"newOwner\":\"The address to transfer ownership to.\"}}}},\"userdoc\":{\"methods\":{\"renounceOwnership()\":{\"notice\":\"Renouncing to ownership will leave the contract without an owner. It will not be possible to call the functions with the `onlyOwner` modifier anymore.\"}}}},\"settings\":{\"compilationTarget\":{\"@ensdomains/ethregistrar/contracts/SimplePriceOracle.sol\":\"SimplePriceOracle\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@ensdomains/ethregistrar/contracts/PriceOracle.sol\":{\"keccak256\":\"0x9e21289a1fa35c8075409acca1de56450a24a139c6c905f789cd435409468a4d\",\"urls\":[\"bzz-raw://129cad7cc78129fde500232e787b191ea5239a94a09bdc69e63fd09706f42cba\",\"dweb:/ipfs/Qmcz3WGiEMhZCpwwixdYTNk7G4rdrH7xcX2PEq1RriJqPy\"]},\"@ensdomains/ethregistrar/contracts/SafeMath.sol\":{\"keccak256\":\"0x5ee355097dba17dff1eb9c6271b18ab14c79e8087977a910583439992bdf8dbb\",\"urls\":[\"bzz-raw://e6ab567a007e5b2e2e38b243f83d0dc7c58775559844ec709558bf1345c41155\",\"dweb:/ipfs/QmbAiyTwcD65zycx9erwF5oidQoLSLBYG4m9mcz4tuMZZB\"]},\"@ensdomains/ethregistrar/contracts/SimplePriceOracle.sol\":{\"keccak256\":\"0x5555e8d9983b567ffb4c7df9147b2a11db0b5104f9f7be58bddcf1c312697374\",\"urls\":[\"bzz-raw://23623804d9ef865c927471423c19330c0f7d185ceff71b2de4713aa472ae67a9\",\"dweb:/ipfs/QmVvtF49QFxjzBT9QoPuGFJi8vHERzAf1Ph8bQBUQxejqU\"]},\"openzeppelin-solidity/contracts/ownership/Ownable.sol\":{\"keccak256\":\"0x980de387a1a020a498f53d00f89fecebb12c949a17e8f160093c0303ede2b786\",\"urls\":[\"bzz-raw://f07a2c393caa85f62f0aaa461e3edd50aa59371d4209778ba0558d7f8b4b856c\",\"dweb:/ipfs/QmeN3ZiYGSjCnQFeYaJNgoXjF9eDue1g3e9pqManRkeBtV\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516107493803806107498339818101604052602081101561003357600080fd5b8101908080519060200190929190505050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16600073ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a361010f8161011560201b60201c565b506101c4565b61012361016d60201b60201c565b61012c57600080fd5b806001819055507f0b72f3e11c5de918a6d97fb006e47dcf1e9c2f5771378189a012faecdc7e63a1816040518082815260200191505060405180910390a150565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614905090565b610576806101d36000396000f3fe608060405234801561001057600080fd5b506004361061007d5760003560e01c80638f32d59b1161005b5780638f32d59b1461017757806391b7f5ed14610199578063f2fde38b146101c7578063f8af64ed1461020b5761007d565b806350e9a71514610082578063715018a6146101235780638da5cb5b1461012d575b600080fd5b61010d6004803603606081101561009857600080fd5b81019080803590602001906401000000008111156100b557600080fd5b8201836020820111156100c757600080fd5b803590602001918460018302840111640100000000831117156100e957600080fd5b90919293919293908035906020019092919080359060200190929190505050610229565b6040518082815260200191505060405180910390f35b61012b61024a565b005b61013561031a565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b61017f610343565b604051808215151515815260200191505060405180910390f35b6101c5600480360360208110156101af57600080fd5b810190808035906020019092919050505061039a565b005b610209600480360360208110156101dd57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506103ec565b005b610213610409565b6040518082815260200191505060405180910390f35b60006102406001548361040f90919063ffffffff16565b9050949350505050565b610252610343565b61025b57600080fd5b600073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a360008060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614905090565b6103a2610343565b6103ab57600080fd5b806001819055507f0b72f3e11c5de918a6d97fb006e47dcf1e9c2f5771378189a012faecdc7e63a1816040518082815260200191505060405180910390a150565b6103f4610343565b6103fd57600080fd5b61040681610449565b50565b60015481565b6000808314156104225760009050610443565b600082840290508284828161043357fe5b041461043e57600080fd5b809150505b92915050565b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff16141561048357600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505056fea265627a7a723158202685fecf51d67891802030e65d5e30a6eaed38d09e86ccb6efb70cdeada7de6864736f6c63430005100032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061007d5760003560e01c80638f32d59b1161005b5780638f32d59b1461017757806391b7f5ed14610199578063f2fde38b146101c7578063f8af64ed1461020b5761007d565b806350e9a71514610082578063715018a6146101235780638da5cb5b1461012d575b600080fd5b61010d6004803603606081101561009857600080fd5b81019080803590602001906401000000008111156100b557600080fd5b8201836020820111156100c757600080fd5b803590602001918460018302840111640100000000831117156100e957600080fd5b90919293919293908035906020019092919080359060200190929190505050610229565b6040518082815260200191505060405180910390f35b61012b61024a565b005b61013561031a565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b61017f610343565b604051808215151515815260200191505060405180910390f35b6101c5600480360360208110156101af57600080fd5b810190808035906020019092919050505061039a565b005b610209600480360360208110156101dd57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291905050506103ec565b005b610213610409565b6040518082815260200191505060405180910390f35b60006102406001548361040f90919063ffffffff16565b9050949350505050565b610252610343565b61025b57600080fd5b600073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a360008060006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff1614905090565b6103a2610343565b6103ab57600080fd5b806001819055507f0b72f3e11c5de918a6d97fb006e47dcf1e9c2f5771378189a012faecdc7e63a1816040518082815260200191505060405180910390a150565b6103f4610343565b6103fd57600080fd5b61040681610449565b50565b60015481565b6000808314156104225760009050610443565b600082840290508284828161043357fe5b041461043e57600080fd5b809150505b92915050565b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff16141561048357600080fd5b8073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a3806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505056fea265627a7a723158202685fecf51d67891802030e65d5e30a6eaed38d09e86ccb6efb70cdeada7de6864736f6c63430005100032",
+  "sourceMap": "143:784:27:-;;;326:73;8:9:-1;5:2;;;30:1;27;20:12;5:2;326:73:27;;;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;326:73:27;;;;;;;;;;;;;;;;524:10:53;515:6;;:19;;;;;;;;;;;;;;;;;;582:6;;;;;;;;;;;549:40;;578:1;549:40;;;;;;;;;;;;372:20:27;381:10;372:8;;;:20;;:::i;:::-;326:73;143:784;;405:134;863:9:53;:7;;;:9;;:::i;:::-;855:18;;;;;;479:10:27;467:9;:22;;;;504:28;521:10;504:28;;;;;;;;;;;;;;;;;;405:134;:::o;979:90:53:-;1019:4;1056:6;;;;;;;;;;;1042:20;;:10;:20;;;1035:27;;979:90;:::o;143:784:27:-;;;;;;;",
+  "deployedSourceMap": "143:784:27:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;143:784:27;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;776:149;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;776:149:27;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;776:149:27;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;776:149:27;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;776:149:27;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1347:137:53;;;:::i;:::-;;659:77;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;979:90;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;405:134:27;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;405:134:27;;;;;;;;;;;;;;;;;:::i;:::-;;1655:107:53;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;1655:107:53;;;;;;;;;;;;;;;;;;;:::i;:::-;;257:21:27;;;:::i;:::-;;;;;;;;;;;;;;;;;;;776:149;872:4;895:23;908:9;;895:8;:12;;:23;;;;:::i;:::-;888:30;;776:149;;;;;;:::o;1347:137:53:-;863:9;:7;:9::i;:::-;855:18;;;;;;1445:1;1408:40;;1429:6;;;;;;;;;;;1408:40;;;;;;;;;;;;1475:1;1458:6;;:19;;;;;;;;;;;;;;;;;;1347:137::o;659:77::-;697:7;723:6;;;;;;;;;;;716:13;;659:77;:::o;979:90::-;1019:4;1056:6;;;;;;;;;;;1042:20;;:10;:20;;;1035:27;;979:90;:::o;405:134:27:-;863:9:53;:7;:9::i;:::-;855:18;;;;;;479:10:27;467:9;:22;;;;504:28;521:10;504:28;;;;;;;;;;;;;;;;;;405:134;:::o;1655:107:53:-;863:9;:7;:9::i;:::-;855:18;;;;;;1727:28;1746:8;1727:18;:28::i;:::-;1655:107;:::o;257:21:27:-;;;;:::o;231:421:26:-;289:7;534:1;529;:6;525:45;;;558:1;551:8;;;;525:45;580:9;596:1;592;:5;580:17;;624:1;619;615;:5;;;;;;:10;607:19;;;;;;644:1;637:8;;;231:421;;;;;:::o;1906:183:53:-;1999:1;1979:22;;:8;:22;;;;1971:31;;;;;;2046:8;2017:38;;2038:6;;;;;;;;;;;2017:38;;;;;;;;;;;;2074:8;2065:6;;:17;;;;;;;;;;;;;;;;;;1906:183;:::o",
+  "source": "pragma solidity ^0.5.0;\n\nimport \"./PriceOracle.sol\";\nimport \"./SafeMath.sol\";\nimport \"openzeppelin-solidity/contracts/ownership/Ownable.sol\";\n\ncontract SimplePriceOracle is Ownable, PriceOracle {\n    using SafeMath for *;\n\n    // Rent in wei per second\n    uint public rentPrice;\n\n    event RentPriceChanged(uint price);\n\n    constructor(uint _rentPrice) public {\n        setPrice(_rentPrice);\n    }\n\n    function setPrice(uint _rentPrice) public onlyOwner {\n        rentPrice = _rentPrice;\n        emit RentPriceChanged(_rentPrice);\n    }\n\n    /**\n     * @dev Returns the price to register or renew a name.\n     * @param duration How long the name is being registered or extended for, in seconds.\n     * @return The price of this renewal or registration, in wei.\n     */\n    function price(string calldata /*name*/, uint /*expires*/, uint duration) external view returns(uint) {\n        return duration.mul(rentPrice);\n    }\n}\n",
+  "sourcePath": "@ensdomains/ethregistrar/contracts/SimplePriceOracle.sol",
+  "ast": {
+    "absolutePath": "@ensdomains/ethregistrar/contracts/SimplePriceOracle.sol",
+    "exportedSymbols": {
+      "SimplePriceOracle": [
+        7914
+      ]
+    },
+    "id": 7915,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 7855,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:27"
+      },
+      {
+        "absolutePath": "@ensdomains/ethregistrar/contracts/PriceOracle.sol",
+        "file": "./PriceOracle.sol",
+        "id": 7856,
+        "nodeType": "ImportDirective",
+        "scope": 7915,
+        "sourceUnit": 7288,
+        "src": "25:27:27",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@ensdomains/ethregistrar/contracts/SafeMath.sol",
+        "file": "./SafeMath.sol",
+        "id": 7857,
+        "nodeType": "ImportDirective",
+        "scope": 7915,
+        "sourceUnit": 7854,
+        "src": "53:24:27",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/ownership/Ownable.sol",
+        "file": "openzeppelin-solidity/contracts/ownership/Ownable.sol",
+        "id": 7858,
+        "nodeType": "ImportDirective",
+        "scope": 7915,
+        "sourceUnit": 11408,
+        "src": "78:63:27",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 7859,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11407,
+              "src": "173:7:27",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$11407",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 7860,
+            "nodeType": "InheritanceSpecifier",
+            "src": "173:7:27"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 7861,
+              "name": "PriceOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7287,
+              "src": "182:11:27",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PriceOracle_$7287",
+                "typeString": "contract PriceOracle"
+              }
+            },
+            "id": 7862,
+            "nodeType": "InheritanceSpecifier",
+            "src": "182:11:27"
+          }
+        ],
+        "contractDependencies": [
+          7287,
+          11407
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 7914,
+        "linearizedBaseContracts": [
+          7914,
+          7287,
+          11407
+        ],
+        "name": "SimplePriceOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 7864,
+            "libraryName": {
+              "contractScope": null,
+              "id": 7863,
+              "name": "SafeMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7853,
+              "src": "206:8:27",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMath_$7853",
+                "typeString": "library SafeMath"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "200:21:27",
+            "typeName": null
+          },
+          {
+            "constant": false,
+            "id": 7866,
+            "name": "rentPrice",
+            "nodeType": "VariableDeclaration",
+            "scope": 7914,
+            "src": "257:21:27",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 7865,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "257:4:27",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 7870,
+            "name": "RentPriceChanged",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 7869,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7868,
+                  "indexed": false,
+                  "name": "price",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7870,
+                  "src": "308:10:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7867,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "308:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "307:12:27"
+            },
+            "src": "285:35:27"
+          },
+          {
+            "body": {
+              "id": 7879,
+              "nodeType": "Block",
+              "src": "362:37:27",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7876,
+                        "name": "_rentPrice",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7872,
+                        "src": "381:10:27",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 7875,
+                      "name": "setPrice",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7896,
+                      "src": "372:8:27",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 7877,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "372:20:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 7878,
+                  "nodeType": "ExpressionStatement",
+                  "src": "372:20:27"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 7880,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7873,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7872,
+                  "name": "_rentPrice",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7880,
+                  "src": "338:15:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7871,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "338:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "337:17:27"
+            },
+            "returnParameters": {
+              "id": 7874,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "362:0:27"
+            },
+            "scope": 7914,
+            "src": "326:73:27",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 7895,
+              "nodeType": "Block",
+              "src": "457:82:27",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 7889,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 7887,
+                      "name": "rentPrice",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7866,
+                      "src": "467:9:27",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 7888,
+                      "name": "_rentPrice",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7882,
+                      "src": "479:10:27",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "467:22:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 7890,
+                  "nodeType": "ExpressionStatement",
+                  "src": "467:22:27"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7892,
+                        "name": "_rentPrice",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7882,
+                        "src": "521:10:27",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 7891,
+                      "name": "RentPriceChanged",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7870,
+                      "src": "504:16:27",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 7893,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "504:28:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 7894,
+                  "nodeType": "EmitStatement",
+                  "src": "499:33:27"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 7896,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 7885,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 7884,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 11341,
+                  "src": "447:9:27",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "447:9:27"
+              }
+            ],
+            "name": "setPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7883,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7882,
+                  "name": "_rentPrice",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7896,
+                  "src": "423:15:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7881,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "423:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "422:17:27"
+            },
+            "returnParameters": {
+              "id": 7886,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "457:0:27"
+            },
+            "scope": 7914,
+            "src": "405:134:27",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 7912,
+              "nodeType": "Block",
+              "src": "878:47:27",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7909,
+                        "name": "rentPrice",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7866,
+                        "src": "908:9:27",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 7907,
+                        "name": "duration",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7902,
+                        "src": "895:8:27",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "id": 7908,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "mul",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 7760,
+                      "src": "895:12:27",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
+                        "typeString": "function (uint256,uint256) pure returns (uint256)"
+                      }
+                    },
+                    "id": 7910,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "895:23:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 7906,
+                  "id": 7911,
+                  "nodeType": "Return",
+                  "src": "888:30:27"
+                }
+              ]
+            },
+            "documentation": "@dev Returns the price to register or renew a name.\n@param duration How long the name is being registered or extended for, in seconds.\n@return The price of this renewal or registration, in wei.",
+            "id": 7913,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "price",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7903,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7898,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7913,
+                  "src": "791:15:27",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 7897,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "791:6:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7900,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7913,
+                  "src": "817:4:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7899,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "817:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7902,
+                  "name": "duration",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7913,
+                  "src": "835:13:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7901,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "835:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "790:59:27"
+            },
+            "returnParameters": {
+              "id": 7906,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7905,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7913,
+                  "src": "872:4:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7904,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "872:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "871:6:27"
+            },
+            "scope": 7914,
+            "src": "776:149:27",
+            "stateMutability": "view",
+            "superFunction": 7286,
+            "visibility": "external"
+          }
+        ],
+        "scope": 7915,
+        "src": "143:784:27"
+      }
+    ],
+    "src": "0:928:27"
+  },
+  "legacyAST": {
+    "absolutePath": "@ensdomains/ethregistrar/contracts/SimplePriceOracle.sol",
+    "exportedSymbols": {
+      "SimplePriceOracle": [
+        7914
+      ]
+    },
+    "id": 7915,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 7855,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:27"
+      },
+      {
+        "absolutePath": "@ensdomains/ethregistrar/contracts/PriceOracle.sol",
+        "file": "./PriceOracle.sol",
+        "id": 7856,
+        "nodeType": "ImportDirective",
+        "scope": 7915,
+        "sourceUnit": 7288,
+        "src": "25:27:27",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@ensdomains/ethregistrar/contracts/SafeMath.sol",
+        "file": "./SafeMath.sol",
+        "id": 7857,
+        "nodeType": "ImportDirective",
+        "scope": 7915,
+        "sourceUnit": 7854,
+        "src": "53:24:27",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "openzeppelin-solidity/contracts/ownership/Ownable.sol",
+        "file": "openzeppelin-solidity/contracts/ownership/Ownable.sol",
+        "id": 7858,
+        "nodeType": "ImportDirective",
+        "scope": 7915,
+        "sourceUnit": 11408,
+        "src": "78:63:27",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 7859,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11407,
+              "src": "173:7:27",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$11407",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 7860,
+            "nodeType": "InheritanceSpecifier",
+            "src": "173:7:27"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 7861,
+              "name": "PriceOracle",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7287,
+              "src": "182:11:27",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PriceOracle_$7287",
+                "typeString": "contract PriceOracle"
+              }
+            },
+            "id": 7862,
+            "nodeType": "InheritanceSpecifier",
+            "src": "182:11:27"
+          }
+        ],
+        "contractDependencies": [
+          7287,
+          11407
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 7914,
+        "linearizedBaseContracts": [
+          7914,
+          7287,
+          11407
+        ],
+        "name": "SimplePriceOracle",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 7864,
+            "libraryName": {
+              "contractScope": null,
+              "id": 7863,
+              "name": "SafeMath",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 7853,
+              "src": "206:8:27",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMath_$7853",
+                "typeString": "library SafeMath"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "200:21:27",
+            "typeName": null
+          },
+          {
+            "constant": false,
+            "id": 7866,
+            "name": "rentPrice",
+            "nodeType": "VariableDeclaration",
+            "scope": 7914,
+            "src": "257:21:27",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 7865,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "257:4:27",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 7870,
+            "name": "RentPriceChanged",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 7869,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7868,
+                  "indexed": false,
+                  "name": "price",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7870,
+                  "src": "308:10:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7867,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "308:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "307:12:27"
+            },
+            "src": "285:35:27"
+          },
+          {
+            "body": {
+              "id": 7879,
+              "nodeType": "Block",
+              "src": "362:37:27",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7876,
+                        "name": "_rentPrice",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7872,
+                        "src": "381:10:27",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 7875,
+                      "name": "setPrice",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7896,
+                      "src": "372:8:27",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 7877,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "372:20:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 7878,
+                  "nodeType": "ExpressionStatement",
+                  "src": "372:20:27"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 7880,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7873,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7872,
+                  "name": "_rentPrice",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7880,
+                  "src": "338:15:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7871,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "338:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "337:17:27"
+            },
+            "returnParameters": {
+              "id": 7874,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "362:0:27"
+            },
+            "scope": 7914,
+            "src": "326:73:27",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 7895,
+              "nodeType": "Block",
+              "src": "457:82:27",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 7889,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 7887,
+                      "name": "rentPrice",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7866,
+                      "src": "467:9:27",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 7888,
+                      "name": "_rentPrice",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7882,
+                      "src": "479:10:27",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "467:22:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 7890,
+                  "nodeType": "ExpressionStatement",
+                  "src": "467:22:27"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7892,
+                        "name": "_rentPrice",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7882,
+                        "src": "521:10:27",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 7891,
+                      "name": "RentPriceChanged",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 7870,
+                      "src": "504:16:27",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 7893,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "504:28:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 7894,
+                  "nodeType": "EmitStatement",
+                  "src": "499:33:27"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 7896,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 7885,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 7884,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 11341,
+                  "src": "447:9:27",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "447:9:27"
+              }
+            ],
+            "name": "setPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7883,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7882,
+                  "name": "_rentPrice",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7896,
+                  "src": "423:15:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7881,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "423:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "422:17:27"
+            },
+            "returnParameters": {
+              "id": 7886,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "457:0:27"
+            },
+            "scope": 7914,
+            "src": "405:134:27",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 7912,
+              "nodeType": "Block",
+              "src": "878:47:27",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 7909,
+                        "name": "rentPrice",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7866,
+                        "src": "908:9:27",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 7907,
+                        "name": "duration",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 7902,
+                        "src": "895:8:27",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "id": 7908,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "mul",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 7760,
+                      "src": "895:12:27",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
+                        "typeString": "function (uint256,uint256) pure returns (uint256)"
+                      }
+                    },
+                    "id": 7910,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "895:23:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 7906,
+                  "id": 7911,
+                  "nodeType": "Return",
+                  "src": "888:30:27"
+                }
+              ]
+            },
+            "documentation": "@dev Returns the price to register or renew a name.\n@param duration How long the name is being registered or extended for, in seconds.\n@return The price of this renewal or registration, in wei.",
+            "id": 7913,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "price",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 7903,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7898,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7913,
+                  "src": "791:15:27",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 7897,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "791:6:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7900,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7913,
+                  "src": "817:4:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7899,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "817:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 7902,
+                  "name": "duration",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7913,
+                  "src": "835:13:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7901,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "835:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "790:59:27"
+            },
+            "returnParameters": {
+              "id": 7906,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 7905,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 7913,
+                  "src": "872:4:27",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 7904,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "872:4:27",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "871:6:27"
+            },
+            "scope": 7914,
+            "src": "776:149:27",
+            "stateMutability": "view",
+            "superFunction": 7286,
+            "visibility": "external"
+          }
+        ],
+        "scope": 7915,
+        "src": "143:784:27"
+      }
+    ],
+    "src": "0:928:27"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.22",
+  "updatedAt": "2020-01-30T01:17:29.501Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {
+      "isOwner()": {
+        "return": "true if `msg.sender` is the owner of the contract."
+      },
+      "owner()": {
+        "return": "the address of the owner."
+      },
+      "price(string,uint256,uint256)": {
+        "details": "Returns the price to register or renew a name.",
+        "params": {
+          "duration": "How long the name is being registered or extended for, in seconds."
+        },
+        "return": "The price of this renewal or registration, in wei."
+      },
+      "renounceOwnership()": {
+        "details": "Allows the current owner to relinquish control of the contract."
+      },
+      "transferOwnership(address)": {
+        "details": "Allows the current owner to transfer control of the contract to a newOwner.",
+        "params": {
+          "newOwner": "The address to transfer ownership to."
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {
+      "renounceOwnership()": {
+        "notice": "Renouncing to ownership will leave the contract without an owner. It will not be possible to call the functions with the `onlyOwner` modifier anymore."
+      }
+    }
+  }
+}
