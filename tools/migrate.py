@@ -17,6 +17,9 @@ import time
 import web3
 from web3.auto import w3
 
+# from web3.middleware import geth_poa_middleware
+# w3.middleware_onion.inject(geth_poa_middleware, layer=0)
+
 """
 Performs a migration of .eth 2LDs from one ENS deployment to another.
 
@@ -59,6 +62,22 @@ RESOLVER_ABI = json.loads('''[{"constant":true,"inputs":[{"internalType":"bytes4
 
 CONTROLLER_ABI = json.loads('''[{"constant":true,"inputs":[{"internalType":"bytes4","name":"interfaceID","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"address","name":"owner","type":"address"},{"internalType":"bytes32","name":"secret","type":"bytes32"},{"internalType":"address","name":"resolver","type":"address"},{"internalType":"address","name":"addr","type":"address"}],"name":"makeCommitmentWithConfig","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"internalType":"contract PriceOracle","name":"_prices","type":"address"}],"name":"setPriceOracle","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_minCommitmentAge","type":"uint256"},{"internalType":"uint256","name":"_maxCommitmentAge","type":"uint256"}],"name":"setCommitmentAges","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"name":"commitments","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"duration","type":"uint256"}],"name":"rentPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"bytes32","name":"secret","type":"bytes32"}],"name":"register","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"MIN_REGISTRATION_DURATION","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"minCommitmentAge","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"isOwner","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"name","type":"string"}],"name":"valid","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"uint256","name":"duration","type":"uint256"}],"name":"renew","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"name","type":"string"}],"name":"available","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"maxCommitmentAge","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"bytes32","name":"commitment","type":"bytes32"}],"name":"commit","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"address","name":"owner","type":"address"},{"internalType":"bytes32","name":"secret","type":"bytes32"}],"name":"makeCommitment","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"internalType":"string","name":"name","type":"string"},{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"duration","type":"uint256"},{"internalType":"bytes32","name":"secret","type":"bytes32"},{"internalType":"address","name":"resolver","type":"address"},{"internalType":"address","name":"addr","type":"address"}],"name":"registerWithConfig","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"contract BaseRegistrar","name":"_base","type":"address"},{"internalType":"contract PriceOracle","name":"_prices","type":"address"},{"internalType":"uint256","name":"_minCommitmentAge","type":"uint256"},{"internalType":"uint256","name":"_maxCommitmentAge","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"name","type":"string"},{"indexed":true,"internalType":"bytes32","name":"label","type":"bytes32"},{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":false,"internalType":"uint256","name":"cost","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"expires","type":"uint256"}],"name":"NameRegistered","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"name","type":"string"},{"indexed":true,"internalType":"bytes32","name":"label","type":"bytes32"},{"indexed":false,"internalType":"uint256","name":"cost","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"expires","type":"uint256"}],"name":"NameRenewed","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oracle","type":"address"}],"name":"NewPriceOracle","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"}]''')
 
+def get_resume_point():
+    try:
+        with open('lastlabel.txt', 'r') as f:
+            return HexBytes(f.read().strip('\n'))
+    except:
+        return None
+
+
+def save_resume_point(label):
+    with open('lastlabel.txt', 'w') as f:
+        f.write(label.hex())
+
+
+def delete_resume_point():
+    os.unlink("lastlabel.txt")
+
 
 def pool_init(contracts):
     g = globals()
@@ -66,7 +85,7 @@ def pool_init(contracts):
         g[name] = w3.eth.contract(address=address, abi=abi)
 
 
-def get_labels(f):
+def get_labels(f, start=None):
     size = os.stat(f.fileno()).st_size
     for i in itertools.count():
         l = f.readline()
@@ -76,7 +95,13 @@ def get_labels(f):
                 logger.info("Read %d labels (%.1f%%)", i, (f.tell()/size) * 100)
             else:
                 logger.info("Read %d labels", i)
-        yield unhexlify(remove_0x_prefix(l.strip()))
+        label = HexBytes(l.strip())
+        # Skip labels until we encounter 'start'
+        if start:
+            if label == start:
+                start = None
+            continue
+        yield label
 
 
 def _filter_migrated(label):
@@ -91,6 +116,8 @@ def filter_migrated_labels(pool, labels):
 
 def _get_migration_data(label):
     """Returns a (type, label, expires) tuple, where `type` is 'legacy', 'permanent' or 'unregistered'."""
+    if newRegistrar.functions.nameExpires(int.from_bytes(label, byteorder='big')).call() > 0:
+        return ('migrated', label, None)
     expires = baseRegistrar.functions.nameExpires(int.from_bytes(label, byteorder='big')).call()
     if expires > time.time():
         return ('permanent', label, datetime.utcfromtimestamp(expires))
@@ -140,49 +167,84 @@ def verify(args, pool, labels, account):
     return 0
 
 
+def transact_with_retries(call, args=None, retries=3):
+    for retry in range(retries):
+        try:
+            return call.transact(args)
+        except:
+            if retry == retries - 1:
+                raise
+            logging.exception("Exception sending transaction; retrying")
+
+
 def migrate(args, pool, labels, account):
-    nonce = w3.eth.getTransactionCount(account.address)
+    nonce = w3.eth.getTransactionCount(account.address, 'pending')
+    logging.info("Starting nonce is %d", nonce)
     if not account and not args.dryrun:
         logging.error("Either --dryrun or --privatekey must be supplied")
         return 1
 
+    #labels = filter_migrated_labels(pool, labels)
     entries = categorise_labels(pool, labels)
     groups = batch_group_by(entries, lambda entry: entry[0], args.batchsize)
-    for kind, group in groups:
-        if kind == 'unregistered':
-            logging.info("Skipping %d unregistered names", len(group))
-            continue
-        logging.info("Migrating %s names from the %s registrar", len(group), kind)
-        labels = [label for (kind, label, expires) in group]
-        if kind == 'permanent':
-            labels = [int.from_bytes(label, byteorder='big') for label in labels]
-            if args.dryrun:
-                registrarMigration.functions.migrateAll(labels).estimateGas()
+    last = None
+    gasPrice = int(args.gasprice * 1000000000)
+    try:
+        for kind, group in groups:
+            if kind == 'unregistered':
+                logging.info("Skipping %d unregistered names", len(group))
+                continue
+            if kind == 'migrated':
+                logging.info("Skipping %d already migrated names", len(group))
+                continue
+            labels = [label for (kind, label, expires) in group]
+            logging.info("Migrating %s names from the %s registrar", len(group), kind)
+            if kind == 'permanent':
+                labels = [int.from_bytes(label, byteorder='big') for label in labels]
+                if args.dryrun:
+                    registrarMigration.functions.migrateAll(labels).estimateGas()
+                else:
+                    tx = transact_with_retries(registrarMigration.functions.migrateAll(labels), {'nonce': nonce, 'gasPrice': gasPrice})
+                    nonce += 1
+                    logging.info("Sent tx %s", tx.hex())
+            elif kind == 'legacy':
+                if args.dryrun:
+                    registrarMigration.functions.migrateAllLegacy(labels).estimateGas()
+                else:
+                    tx = transact_with_retries(registrarMigration.functions.migrateAllLegacy(labels), {'nonce': nonce, 'gasPrice': gasPrice})
+                    nonce += 1
+                    logging.info("Sent tx %s", tx.hex())
             else:
-                tx = registrarMigration.functions.migrateAll(labels).transact({'nonce': nonce})
-                nonce += 1
-                logging.info("Sent tx %s", tx.hex())
-        elif kind == 'legacy':
-            if args.dryrun:
-                registrarMigration.functions.migrateAllLegacy(labels).estimateGas()
-            else:
-                tx = registrarMigration.functions.migrateAllLegacy(labels).transact({'nonce': nonce})
-                nonce += 1
-                logging.info("Sent tx %s", tx.hex())
+                logging.error("Unrecognised kind: %s", kind)
+            last = group[-1][1]
+
+            pending = nonce - w3.eth.getTransactionCount(account.address, 'latest')
+            while pending >= 50:
+                logging.warning("%d pending transactions; pausing", pending)
+                time.sleep(14)
+                pending = nonce - w3.eth.getTransactionCount(account.address, 'latest')
+    except:
+        if last:
+            save_resume_point(last)
+        logging.exception("Encountered an error")
+        return 1
+    delete_resume_point()
     return 0
 
 
 parser = argparse.ArgumentParser(description="Migrate names to the new ENS registry")
 parser.add_argument('migration', type=str, help="Migration contract address")
-parser.add_argument('hashes', type=argparse.FileType('rb'), help="List of label hashes to migrate or check")
+parser.add_argument('hashes', type=argparse.FileType('rt'), help="List of label hashes to migrate or check")
 parser.add_argument('--parallelism', type=int, default=10, help="Number of fetcher processes to run")
 parser.add_argument('--dryrun', default=False, action='store_true')
 parser.add_argument('--privatekey', type=str, help="Hexadecimal private key")
+#parser.add_argument('--start', type=str, default=None, help="Skip any hashes before 'start'")
 
 subparsers = parser.add_subparsers()
 
 migrate_parser = subparsers.add_parser('migrate', help='Migrate names')
 migrate_parser.add_argument('--batchsize', type=int, default=100, help="Number of entries to migrate per batch")
+migrate_parser.add_argument('--gasprice', type=float, default=1.0, help="Gas price, in gwei")
 migrate_parser.set_defaults(func=migrate)
 
 verify_parser = subparsers.add_parser('verify', help='Verify all the provided hashes are migrated')
@@ -196,28 +258,25 @@ def main(args):
         w3.middleware_onion.add(web3.middleware.construct_sign_and_send_raw_middleware(account))
         w3.eth.defaultAccount = account.address
     registrarMigration = w3.eth.contract(address=args.migration, abi=REGISTRAR_MIGRATION_ABI)
-    # registryAddress = registrarMigration.functions.oldENS().call()
-    # logging.info("Old registry at %s", registryAddress)
     auctionRegistrarAddress = registrarMigration.functions.legacyRegistrar().call()
     logging.info("Auction registrar at %s", auctionRegistrarAddress)
     baseRegistrarAddress = registrarMigration.functions.oldRegistrar().call()
     logging.info("Base registrar at %s", baseRegistrarAddress)
-    # controllerAddress = discover_registrar_controller(registryAddress)
-    # logging.info("Old controller at %s", controllerAddress)
     newRegistrarAddress = registrarMigration.functions.newRegistrar().call()
     logging.info("New registrar at %s", newRegistrarAddress)
     contracts = [
-        # ('registry', registryAddress, REGISTRY_ABI),
         ('registrarMigration', args.migration, REGISTRAR_MIGRATION_ABI),
         ('auctionRegistrar', auctionRegistrarAddress, AUCTION_REGISTRAR_ABI),
         ('baseRegistrar', baseRegistrarAddress, BASE_REGISTRAR_ABI),
-        # ('controller', controllerAddress, CONTROLLER_ABI),
         ('newRegistrar', newRegistrarAddress, BASE_REGISTRAR_ABI),
     ]
     pool_init(contracts)
     pool = multiprocessing.pool.Pool(args.parallelism, pool_init, (contracts,))
 
-    labels = get_labels(args.hashes)
+    start = get_resume_point()
+    if start:
+        logging.info("Resuming at label %s", start.hex())
+    labels = get_labels(args.hashes, start)
     sys.exit(args.func(args, pool, labels, account))
 
 

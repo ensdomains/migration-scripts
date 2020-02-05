@@ -16,8 +16,8 @@ module.exports = async function(deployer, network, accounts) {
         if(web3.eth.getCode(rootNodeOwner) != '0x') {
             // Root contract deployed on this network
             const root = await Root.at(rootNodeOwner);
-            if(await root.owner() != accounts[0]) {
-              console.log("Cannot activate new deployment: OWNER_ADDRESS does not own root node. Skipping.");
+            if((await root.owner()) != accounts[0]) {
+              console.log("Cannot activate new deployment: OWNER_ADDRESS does not own root contract. Skipping.");
               return;
             }
             await root.setSubnodeOwner(config.ETH_LABEL, RegistrarMigration.address, {from: accounts[0]});

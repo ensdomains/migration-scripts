@@ -1,5 +1,6 @@
 import argparse
 from binascii import unhexlify
+import csv
 from ens.utils import label_to_hash
 from eth_utils import remove_0x_prefix
 from hexbytes import HexBytes
@@ -31,13 +32,17 @@ BASE_REGISTRAR_ABI = json.loads('''[{"constant":true,"inputs":[{"name":"interfac
 
 REGISTRY_ABI = json.loads('''[{"constant":true,"inputs":[{"name":"node","type":"bytes32"}],"name":"resolver","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"node","type":"bytes32"}],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"node","type":"bytes32"},{"name":"label","type":"bytes32"},{"name":"owner","type":"address"}],"name":"setSubnodeOwner","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"node","type":"bytes32"},{"name":"ttl","type":"uint64"}],"name":"setTTL","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"node","type":"bytes32"}],"name":"ttl","outputs":[{"name":"","type":"uint64"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"node","type":"bytes32"},{"name":"resolver","type":"address"}],"name":"setResolver","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"node","type":"bytes32"},{"name":"owner","type":"address"}],"name":"setOwner","outputs":[],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"node","type":"bytes32"},{"indexed":false,"name":"owner","type":"address"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"node","type":"bytes32"},{"indexed":true,"name":"label","type":"bytes32"},{"indexed":false,"name":"owner","type":"address"}],"name":"NewOwner","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"node","type":"bytes32"},{"indexed":false,"name":"resolver","type":"address"}],"name":"NewResolver","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"node","type":"bytes32"},{"indexed":false,"name":"ttl","type":"uint64"}],"name":"NewTTL","type":"event"}]''')
 
+SUBDOMAIN_REGISTRAR_ABI = json.loads('''[{"constant":true,"inputs":[{"name":"interfaceID","type":"bytes4"}],"name":"supportsInterface","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[{"name":"label","type":"bytes32"}],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"stop","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"migration","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"registrarOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"registrar","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"label","type":"bytes32"},{"name":"subdomain","type":"string"}],"name":"query","outputs":[{"name":"domain","type":"string"},{"name":"price","type":"uint256"},{"name":"rent","type":"uint256"},{"name":"referralFeePPM","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"ens","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"label","type":"bytes32"},{"name":"subdomain","type":"string"},{"name":"_subdomainOwner","type":"address"},{"name":"referrer","type":"address"},{"name":"resolver","type":"address"}],"name":"register","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_migration","type":"address"}],"name":"setMigrationAddress","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"label","type":"bytes32"},{"name":"subdomain","type":"string"}],"name":"rentDue","outputs":[{"name":"timestamp","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"name","type":"string"},{"name":"resolver","type":"address"}],"name":"setResolver","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"stopped","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"TLD_NODE","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"name","type":"string"}],"name":"migrate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"label","type":"bytes32"},{"name":"subdomain","type":"string"}],"name":"payRent","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"name","type":"string"},{"name":"price","type":"uint256"},{"name":"referralFeePPM","type":"uint256"},{"name":"_owner","type":"address"},{"name":"_transfer","type":"address"}],"name":"configureDomainFor","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"name","type":"string"},{"name":"price","type":"uint256"},{"name":"referralFeePPM","type":"uint256"}],"name":"configureDomain","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"name","type":"string"}],"name":"unlistDomain","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"name","type":"string"},{"name":"newOwner","type":"address"}],"name":"transfer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"ens","type":"address"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"label","type":"bytes32"},{"indexed":false,"name":"name","type":"string"}],"name":"DomainTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"label","type":"bytes32"},{"indexed":true,"name":"oldOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnerChanged","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"label","type":"bytes32"}],"name":"DomainConfigured","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"label","type":"bytes32"}],"name":"DomainUnlisted","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"label","type":"bytes32"},{"indexed":false,"name":"subdomain","type":"string"},{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"referrer","type":"address"},{"indexed":false,"name":"price","type":"uint256"}],"name":"NewRegistration","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"label","type":"bytes32"},{"indexed":false,"name":"subdomain","type":"string"},{"indexed":false,"name":"amount","type":"uint256"},{"indexed":false,"name":"expirationDate","type":"uint256"}],"name":"RentPaid","type":"event"}]''')
+
 logger = logging.getLogger('main')
 logger.setLevel(logging.DEBUG)
 w3.middleware_onion.add(web3.middleware.http_retry_request_middleware)
 
 parser = argparse.ArgumentParser(description="Extract a list of .eth label hashes from onchain events")
+parser.add_argument('--start', type=int, help="Start block", default=0)
+parser.add_argument('--subdomains', action='store_true', default=False, help="Get subdomain labels instead of .eth labels")
 parser.add_argument('registry', type=str, help="Registry address")
-
+parser.add_argument('file', type=argparse.FileType('r+t'))
 
 def get_logs_iter(event, argumentFilters=None, fromBlock=1, toBlock='latest', targetBatchSize=100, maxBlocks=1000, mixingFactor=0.05):
     if toBlock == 'latest':
@@ -59,7 +64,7 @@ def get_registrars(ens):
     lastRegistrar = None
     for log in ens.events.NewOwner.getLogs(argument_filters={'node': ZERO_HASH, 'label': label_to_hash('eth')}, fromBlock=0, toBlock='latest'):
         if lastRegistrar is not None:
-            yield (lastRegistrar, startBlock, log.blockNumber)
+            yield (lastRegistrar, startBlock, int(log.blockNumber))
         auctionRegistrar = w3.eth.contract(abi=AUCTION_REGISTRAR_ABI, address=log.args.owner)
         try:
             auctionRegistrar.functions.entries(ZERO_HASH).call()
@@ -73,8 +78,8 @@ def get_registrars(ens):
                 logging.info("Permanent registrar %s at %d", log.args.owner, log.blockNumber)
             except (web3.exceptions.BadFunctionCallOutput, ValueError) as e:
                 logging.error("Unrecognised .eth registrar contract %s at block %d", log.args.owner, log.blockNumber)
-                continue
-        startBlock = log.blockNumber
+                lastRegistrar = None
+        startBlock = int(log.blockNumber)
     if lastRegistrar is not None:
         yield (lastRegistrar, startBlock, 'latest')
 
@@ -83,13 +88,13 @@ def get_auction_registrar_names(event, startBlock, endBlock):
     logging.info("Getting auction registrar names at %s from %d to %d", event.address, startBlock, endBlock)
     for log in get_logs_iter(event, fromBlock=startBlock, toBlock=endBlock):
         if log.args.status != 2: continue
-        yield log.args.hash
+        yield (log.args.hash.hex(),)
 
 
 def get_permanent_registrar_names(event, startBlock, endBlock):
     logging.info("Getting permanent registrar names at %s from %d to %s", event.address, startBlock, endBlock)
     for log in get_logs_iter(event, fromBlock=startBlock, toBlock=endBlock):
-        yield log.args.id.to_bytes(32, byteorder='big')
+        yield (log.args.id.to_bytes(32, byteorder='big').hex(),)
 
 
 def uniq(it):
@@ -100,10 +105,12 @@ def uniq(it):
             seen.add(item)
 
 
-def main(args):
-    ens = w3.eth.contract(abi=REGISTRY_ABI, address=args.registry)
+def get_domains(start, registry):
+    ens = w3.eth.contract(abi=REGISTRY_ABI, address=registry)
     filters = []
     for registrar, startBlock, endBlock in get_registrars(ens):
+        startBlock = max(startBlock, start)
+        if endBlock != 'latest' and startBlock > endBlock: continue
         try:
             filters.append(get_auction_registrar_names(registrar.events.BidRevealed, startBlock, endBlock))
         except web3.exceptions.MismatchedABI:
@@ -111,9 +118,28 @@ def main(args):
                 filters.append(get_permanent_registrar_names(registrar.events.NameRegistered, startBlock, endBlock))
             except web3.exceptions.MismatchedABI:
                 logging.error("Unrecognised registrar at address %s and block %d", registrar.address, startBlock)
-    labels = uniq(itertools.chain(*filters))
+    return itertools.chain(*filters)
+
+
+def get_subdomains(start, registrarAddress):
+    registrar = w3.eth.contract(abi=SUBDOMAIN_REGISTRAR_ABI, address=registrarAddress)
+    for log in get_logs_iter(registrar.events.NewRegistration, fromBlock=start, toBlock='latest'):
+        yield (log.args.label.hex(), log.args.subdomain)
+
+
+def main(args):
+    r = csv.reader(args.file)
+    labels = set((tuple(row) for row in r))
+    if args.subdomains:
+        new_labels = get_subdomains(args.start, args.registry)
+    else:
+        new_labels = get_domains(args.start, args.registry)
+    labels = uniq(itertools.chain(labels, new_labels))
+    args.file.seek(0)
+    w = csv.writer(args.file)
     for label in labels:
-        print(label.hex())
+        w.writerow(label)
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
