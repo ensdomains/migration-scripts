@@ -159,11 +159,13 @@ def parse_duration(s):
 
 
 def verify(args, pool, labels, account):
-    labels = filter_migrated_labels(pool, labels)
-    for label in labels:
-        print("%s is not migrated" % (label.hex(),))
-    labels = list(labels)
-    print("%d unmigrated labels found" % (len(labels),))
+    labels = categorise_labels(pool, labels)
+    count = 0
+    for type, label, expires in labels:
+        if type not in ('migrated', 'unregistered'):
+            print("%s is not migrated; still on %s registrar" % (label.hex(), type))
+            count += 1
+    print("%d unmigrated labels found" % (count,))
     return 0
 
 
