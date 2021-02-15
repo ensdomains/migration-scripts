@@ -7,12 +7,12 @@ const ETH_NODE = namehash.hash("eth");
 
 // Old registry address for each network
 const REGISTRIES = {
-  mainnet: "0x314159265dd8dbb310642f98f50c066173c1259b",
-  "mainnet-test": "0x314159265dd8dbb310642f98f50c066173c1259b",
-  test: "0x112234455c3a32fd11230c42e7bccd4a84e02010",
-  ropsten: "0x112234455c3a32fd11230c42e7bccd4a84e02010",
-  goerli: "0x112234455c3a32fd11230c42e7bccd4a84e02010",
-  rinkeby: "0xe7410170f87102df0055eb195163a03b7f2bff4a",
+  mainnet: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+  "mainnet-test": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+  test: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+  ropsten: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+  goerli: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+  rinkeby: "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
 };
 
 // Price oracle contract on each network
